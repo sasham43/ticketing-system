@@ -19,7 +19,11 @@ app.controller('TicketController', ['$http', function($http){
       console.log('Tickets retrieved:', response);
       vm.ticketList = response.data;
       vm.ticketList.map(function(ticketEntry){
-        return new Date(ticketEntry.dateCreated);
+        var displayDateCreated = moment(ticketEntry.dateCreated).format("dddd, MMMM Do YYYY, h:mm:ss a");
+        ticketEntry.dateCreatedString = displayDateCreated;
+        var displayDateUpdated = moment(ticketEntry.dateUpdated).format("dddd, MMMM Do YYYY, h:mm:ss a");
+        ticketEntry.dateUpdatedString = displayDateUpdated;
+        //return newDate;
       });
     });
   };

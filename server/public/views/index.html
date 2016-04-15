@@ -7,6 +7,7 @@
     <!-- Libraries -->
     <script src="vendor/angular/angular.min.js"></script>
     <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="vendor/moment/moment.js"></script>
 
     <!-- Mine -->
     <script src="assets/scripts/client.min.js"></script>
@@ -52,10 +53,10 @@
         Reporter: <span ng-show="ticket.editMode === false">{{ticket.reporter}}</span> <input type="text" ng-model="vm.editTicket.reporter" ng-show="ticket.editMode"/>
       </p>
       <p>
-        Date Created: {{ticket.dateCreated}}
+        Date Created: {{ticket.dateCreatedString}}
       </p>
       <p>
-        Date Updated: {{ticket.dateUpdated}}
+        Date Updated: {{ticket.dateUpdatedString}}
       </p>
       <button class="btn btn-success" ng-click="vm.removeTicket(ticket)">Completed</button>
       <button class="btn btn-warning" ng-click="vm.editThisTicket(ticket)" ng-show="ticket.editMode === false">Edit</button>

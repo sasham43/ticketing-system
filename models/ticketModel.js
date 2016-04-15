@@ -9,7 +9,9 @@ var ticketSchema = new Schema({
   assignee: String,
   reporter: String,
   dateCreated: Date,
+  dateCreatedString: String,
   dateUpdated: Date,
+  dateUpdatedString: String,
   editMode: Boolean
 });
 
