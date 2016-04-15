@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ticketApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Ticketing System</title>
+
+    <!-- Libraries -->
+    <script src="vendor/angular/angular.min.js"></script>
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css"/>
+
+    <!-- Mine -->
+    <script src="assets/scripts/client.min.js"></script>
+
+  </head>
+  <body ng-controller="TicketController as vm">
+    <h1>Ticketing System</h1>
+    <form ng-submit="vm.submitTicket()">
+      <p>
+        Name: <input type="text" ng-model="vm.newTicket.name" />
+      </p>
+      <p>
+        Type: <input type="text" ng-model="vm.newTicket.type" />
+      </p>
+      <p>
+        Priority: <input type="text" ng-model="vm.newTicket.priority" />
+      </p>
+      <p>
+        Description: <input type="text" ng-model="vm.newTicket.description" />
+      </p>
+      <p>
+        Assignee: <input type="text" ng-model="vm.newTicket.assignee" />
+      </p>
+      <p>
+        Reporter: <input type="text" ng-model="vm.newTicket.reporter" />
+      </p>
+      <input type="submit" />
+    </form>
+    <div class="col-md-4 well" ng-repeat="ticket in vm.ticketList">
+      <p>
+        Name: {{ticket.name}}
+      </p>
+      <p>
+        Type: {{ticket.type}}
+      </p>
+      <p>
+        Priority: {{ticket.priority}}
+      </p>
+      <p>
+        Description: {{ticket.description}}
+      </p>
+      <p>
+        Assignee: {{ticket.assignee}}
+      </p>
+      <p>
+        Reporter: {{ticket.reporter}}
+      </p>
+      <p>
+        Date Created: {{ticket.dateCreated}}
+      </p>
+      <p>
+        Date Updated: {{ticket.dateUpdated}}
+      </p>
+      <button class="btn btn-success" ng-click="vm.removeTicket(ticket)">Completed</button>
+    </div>
+  </body>
+</html>
