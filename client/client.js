@@ -6,7 +6,8 @@ app.controller('TicketController', ['$http', function($http){
   vm.ticketList = [];
 
   vm.submitTicket = function(){
-    // console.log('submitted');
+    // set up boolean values on object for later
+    vm.newTicket.editMode = false;
     $http.post('/new', vm.newTicket).then(function(response){
       console.log('Ticket submitted successfully');
       vm.getAllTickets();
@@ -17,6 +18,9 @@ app.controller('TicketController', ['$http', function($http){
     $http.get('/all').then(function(response){
       console.log('Tickets retrieved:', response);
       vm.ticketList = response.data;
+      vm.ticketList.map(function(ticketEntry){
+        return new Date(ticketEntry.dateCreated);
+      });
     });
   };
 
@@ -27,6 +31,25 @@ app.controller('TicketController', ['$http', function($http){
         vm.getAllTickets();
     });
   };
+
+  vm.editThisTicket = function(ticketEntry){
+    vm.editTicket = ticketEntry;
+    vm.editTicket.editMode = true;
+  };
+
+  vm.saveTicket = function(){
+    console.log(vm.editTicket);
+    vm.editTicket.editMode = false;
+    $http.put('/update', vm.editTicket).then(function(response){
+      console.log('Ticket updated');
+      vm.editTicket = {};
+      vm.getAllTickets();
+    });
+  };
+
+  vm.displayDate = function(dateString){
+    return Date(dateString);
+  }
 
   vm.getAllTickets();
 }]);

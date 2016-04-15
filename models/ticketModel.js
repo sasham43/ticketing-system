@@ -9,7 +9,8 @@ var ticketSchema = new Schema({
   assignee: String,
   reporter: String,
   dateCreated: Date,
-  dateUpdated: Date
+  dateUpdated: Date,
+  editMode: Boolean
 });
 
 var Ticket = mongoose.model('Ticket', ticketSchema);

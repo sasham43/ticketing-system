@@ -13,46 +13,43 @@
 
   </head>
   <body ng-controller="TicketController as vm">
-    <h1>Ticketing System</h1>
-    <form ng-submit="vm.submitTicket()">
-      <p>
-        Name: <input type="text" ng-model="vm.newTicket.name" />
-      </p>
-      <p>
-        Type: <input type="text" ng-model="vm.newTicket.type" />
-      </p>
-      <p>
-        Priority: <input type="text" ng-model="vm.newTicket.priority" />
-      </p>
-      <p>
-        Description: <input type="text" ng-model="vm.newTicket.description" />
-      </p>
-      <p>
-        Assignee: <input type="text" ng-model="vm.newTicket.assignee" />
-      </p>
-      <p>
-        Reporter: <input type="text" ng-model="vm.newTicket.reporter" />
-      </p>
-      <input type="submit" />
-    </form>
+    <div class="jumbotron">
+      <h1 class="text-center">Ticketing System</h1>
+      <form ng-submit="vm.submitTicket()">
+          Name: <input type="text" ng-model="vm.newTicket.name" />
+
+          Type: <input type="text" ng-model="vm.newTicket.type" />
+
+          Priority: <input type="text" ng-model="vm.newTicket.priority" />
+
+          Description: <input type="text" ng-model="vm.newTicket.description" />
+
+          Assignee: <input type="text" ng-model="vm.newTicket.assignee" />
+
+          Reporter: <input type="text" ng-model="vm.newTicket.reporter" />
+
+        <input type="submit" />
+      </form>
+    </div>
+
     <div class="col-md-4 well" ng-repeat="ticket in vm.ticketList">
       <p>
-        Name: {{ticket.name}}
+        Name: <span ng-show="ticket.editMode === false">{{ticket.name}}</span> <input type="text" ng-model="vm.editTicket.name" ng-show="ticket.editMode"/>
       </p>
       <p>
-        Type: {{ticket.type}}
+        Type: <span ng-show="ticket.editMode === false">{{ticket.type}}</span> <input type="text" ng-model="vm.editTicket.type" ng-show="ticket.editMode"/>
       </p>
       <p>
-        Priority: {{ticket.priority}}
+        Priority: <span ng-show="ticket.editMode === false">{{ticket.priority}}</span> <input type="text" ng-model="vm.editTicket.priority" ng-show="ticket.editMode"/>
       </p>
       <p>
-        Description: {{ticket.description}}
+        Description: <span ng-show="ticket.editMode === false">{{ticket.description}}</span> <input type="text" ng-model="vm.editTicket.description" ng-show="ticket.editMode"/>
       </p>
       <p>
-        Assignee: {{ticket.assignee}}
+        Assignee: <span ng-show="ticket.editMode === false">{{ticket.assignee}}</span> <input type="text" ng-model="vm.editTicket.assignee" ng-show="ticket.editMode"/>
       </p>
       <p>
-        Reporter: {{ticket.reporter}}
+        Reporter: <span ng-show="ticket.editMode === false">{{ticket.reporter}}</span> <input type="text" ng-model="vm.editTicket.reporter" ng-show="ticket.editMode"/>
       </p>
       <p>
         Date Created: {{ticket.dateCreated}}
@@ -61,6 +58,8 @@
         Date Updated: {{ticket.dateUpdated}}
       </p>
       <button class="btn btn-success" ng-click="vm.removeTicket(ticket)">Completed</button>
+      <button class="btn btn-warning" ng-click="vm.editThisTicket(ticket)" ng-show="ticket.editMode === false">Edit</button>
+      <button class="btn btn-info ng-hide" ng-click="vm.saveTicket(ticket)" ng-show="ticket.editMode">Save</button>
     </div>
   </body>
 </html>

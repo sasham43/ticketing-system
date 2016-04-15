@@ -47,4 +47,18 @@ router.delete('/remove/:id', function(request, response){
   });
 });
 
+router.put('/update', function(request, response){
+  var editedTicket = request.body;
+  editedTicket.dateUpdated = new Date();
+  Ticket.findOneAndUpdate({_id: request.body._id}, editedTicket).exec(function(err, ticket){
+    if (err){
+      console.log('Ticket update failed:', err);
+      response.sendStatus(500);
+    } else {
+      console.log('Ticket updated successfully:', ticket);
+      response.sendStatus(200);
+    }
+  });
+});
+
 module.exports = router;
