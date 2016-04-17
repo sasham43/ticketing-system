@@ -8,6 +8,7 @@ app.controller('TicketController', ['$http', function($http){
   vm.submitTicket = function(){
     // set up boolean values on object for later
     vm.newTicket.editMode = false;
+    vm.newTicket.disableEdit = false;
     $http.post('/new', vm.newTicket).then(function(response){
       console.log('Ticket submitted successfully');
       vm.getAllTickets();
@@ -39,6 +40,7 @@ app.controller('TicketController', ['$http', function($http){
   vm.editThisTicket = function(ticketEntry){
     vm.editTicket = ticketEntry;
     vm.editTicket.editMode = true;
+    vm.disableEdits();
   };
 
   vm.saveTicket = function(){
@@ -46,14 +48,27 @@ app.controller('TicketController', ['$http', function($http){
     vm.editTicket.editMode = false;
     $http.put('/update', vm.editTicket).then(function(response){
       console.log('Ticket updated');
+      vm.enableEdits();
       vm.editTicket = {};
       vm.getAllTickets();
     });
   };
 
-  vm.displayDate = function(dateString){
-    return Date(dateString);
-  }
+  vm.disableEdits = function(){
+    vm.ticketList.map(function(ticketEntry){
+      if(!ticketEntry.editMode) {
+        ticketEntry.disableEdit = true;
+      }
+    });
+  };
+
+  vm.enableEdits = function(){
+    vm.ticketList.map(function(ticketEntry){
+      if(ticketEntry.disableEdit){
+        ticketEntry.disableEdit = false;
+      }
+    });
+  };
 
   vm.getAllTickets();
 }]);

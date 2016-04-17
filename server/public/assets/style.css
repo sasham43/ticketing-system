@@ -1,0 +1,11 @@
+form{
+  padding: 0 1em;
+}
+
+.well{
+  min-height: 350px;
+}
+
+#submit{
+  margin-top: 1em;
+}

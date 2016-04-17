@@ -12,7 +12,8 @@ var ticketSchema = new Schema({
   dateCreatedString: String,
   dateUpdated: Date,
   dateUpdatedString: String,
-  editMode: Boolean
+  editMode: Boolean,
+  disableEdit: Boolean
 });
 
 var Ticket = mongoose.model('Ticket', ticketSchema);
