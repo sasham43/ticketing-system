@@ -17,17 +17,16 @@ app.use('/', tickets);
 //    DATABASE
 /////////////////////////////////////////////////
 
-var MongoDB = mongoose.connect('mongodb://localhost/ticketStore').connnection;
+var mongoURI = 'mongodb://localhost/ticketStore';
+var MongoDB = mongoose.connect(mongoURI).connection;
+//
+MongoDB.on('error', function (err){
+  console.log('mongodb connection error:', err);
+});
 
-// console.log(MongoDB);
-//
-// MongoDB.on('error', function (err){
-//   console.log('mongodb connection error:', err);
-// });
-//
-// MongoDB.once('open', function(err){
-//   console.log('MongoDB connection open.');
-// });
+MongoDB.once('open', function(err){
+  console.log('MongoDB connection open.');
+});
 
 /////////////////////////////////////////////////
 //    SERVER
